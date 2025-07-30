@@ -5,22 +5,25 @@
  */
 package dao;
 
-import context.DBContext;
-
-import entity.Cart;
-import entity.Review;
-import entity.QuantitySold;
-import entity.TotalSalesSpending;
-import entity.Supplier;
-import entity.Account;
-import entity.Category;
-import entity.Invoice;
-import entity.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import context.DBContext;
+import entity.Account;
+import entity.Cart;
+import entity.Category;
+import entity.Invoice;
+import entity.Product;
+import entity.ProductWithCategory;
+import entity.QuantitySold;
+import entity.Review;
+import entity.Supplier;
+import entity.TotalSalesSpending;
 
 public class DAO {
 
@@ -324,222 +327,13 @@ public class DAO {
         return list;
     }
 
-    public List<Product> getNext3Product(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "SELECT *\n"
-                + "  FROM Product\n"
-                + " ORDER BY id\n"
-                + "OFFSET ? ROWS\n"
-                + " FETCH NEXT 3 ROWS ONLY";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4NikeProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=2\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4NewBalanceProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=3\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4PumaProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=5\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4GiayKhacProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=6\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4MLBProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=4\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
 
-    public List<Product> getNext4AdidasProduct(int amount) {
-        List<Product> list = new ArrayList<>();
-        String query = "select * from Product\r\n"
-                + "where cateID=1\r\n"
-                + "order by id desc\r\n"
-                + "offset ? rows\r\n"
-                + "fetch next 4 rows only";
-        try {
-            conn = new DBContext().getConnection();//mo ket noi voi sql
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, amount);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+
 
     public List<Product> getProductByCID(String cid) {
         List<Product> list = new ArrayList<>();
@@ -1819,5 +1613,83 @@ public class DAO {
         e.printStackTrace();
     }
     return invoices;
+}
+
+    public List<ProductWithCategory> getAllProductWithCategory() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "ORDER BY c.cname, p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15))); // cname from Category table
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public Map<String, List<ProductWithCategory>> getProductsGroupedByCategory() {
+        Map<String, List<ProductWithCategory>> groupedProducts = new HashMap<>();
+        List<ProductWithCategory> allProducts = getAllProductWithCategory();
+        
+        for (ProductWithCategory product : allProducts) {
+            String categoryName = product.getCname();
+            if (!groupedProducts.containsKey(categoryName)) {
+                groupedProducts.put(categoryName, new ArrayList<>());
+            }
+            groupedProducts.get(categoryName).add(product);
+        }
+        
+        return groupedProducts;
+    }
+
+    public List<ProductWithCategory> getProductWithCategoryByIndex(int indexPage) {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "ORDER BY c.cname, p.id " +
+                      "OFFSET ? ROWS " +
+                      "FETCH NEXT 9 ROWS ONLY";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (indexPage - 1) * 9);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15))); // cname from Category table
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
 }
 }

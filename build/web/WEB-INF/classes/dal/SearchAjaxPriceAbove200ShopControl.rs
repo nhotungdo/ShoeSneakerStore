@@ -1,1 +1,0 @@
-control.SearchAjaxPriceAbove200ShopControl
