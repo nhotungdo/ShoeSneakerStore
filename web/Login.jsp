@@ -16,7 +16,7 @@
 
         <title>Login Form</title>
         <style>
-            /* General Styles */
+           
             .auth-wrapper {
                 display: flex;
                 justify-content: center;
@@ -133,13 +133,13 @@
                 text-decoration: none;
             }
 
-            /* Ph?n ch?a hình ?nh bên ph?i */
+       
             .auth-action-right {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 50%; /* Chi?m m?t n?a chi?u r?ng */
-                background-color: #f8f9fa; /* Màu n?n nh? */
+                width: 50%; 
+                background-color: #f8f9fa; 
                 padding: 2rem;
             }
 
@@ -151,11 +151,11 @@
             .auth-image img {
                 width: 100%;
                 height: auto;
-                border-radius: 8px; /* Bo góc hình ?nh */
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ?? bóng nh? */
+                border-radius: 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
             }
 
-            /* ??m b?o auth-container hi?n th? hai c?t */
+    
             .auth-container {
                 display: flex;
                 justify-content: space-between;
@@ -164,12 +164,12 @@
                 border-radius: 8px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
                 width: 100%;
-                max-width: 800px; /* T?ng chi?u r?ng t?i ?a ?? ch?a c? hai ph?n */
+                max-width: 800px; 
             }
 
-            /* ?i?u ch?nh l?i auth-action-left */
+     
             .auth-action-left {
-                width: 50%; /* Chi?m m?t n?a chi?u r?ng */
+                width: 50%; 
                 padding: 2rem;
             }
         </style>

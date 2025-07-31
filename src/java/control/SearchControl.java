@@ -16,6 +16,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import entity.ProductWithCategory;
 
 /**
  *
@@ -44,11 +48,73 @@ public class SearchControl extends HttpServlet {
         List<Category> listC = dao.getAllCategory();
         Product last = dao.getLast();
         
+        // Tạo map phân loại sản phẩm tìm kiếm
+        Map<String, List<ProductWithCategory>> categorizedSearchResults = new HashMap<>();
+        
+        // Chuyển đổi kết quả tìm kiếm thành ProductWithCategory
+        List<ProductWithCategory> searchResultsWithCategory = new ArrayList<>();
+        for (Product product : list) {
+            // Lấy category name cho sản phẩm dựa trên tên sản phẩm
+            String categoryName = getCategoryFromProductName(product.getName());
+            
+            ProductWithCategory productWithCategory = new ProductWithCategory(
+                product.getId(), product.getName(), product.getImage(), product.getPrice(),
+                product.getTitle(), product.getDescription(), product.getModel(),
+                product.getColor(), product.getDelivery(), product.getImage2(),
+                product.getImage3(), product.getImage4(), categoryName
+            );
+            searchResultsWithCategory.add(productWithCategory);
+        }
+        
+        // Nhóm kết quả theo category
+        for (ProductWithCategory product : searchResultsWithCategory) {
+            String categoryName = product.getCname();
+            if (!categorizedSearchResults.containsKey(categoryName)) {
+                categorizedSearchResults.put(categoryName, new ArrayList<>());
+            }
+            categorizedSearchResults.get(categoryName).add(product);
+        }
+        
         request.setAttribute("listP", list);
         request.setAttribute("listCC", listC);
         request.setAttribute("p", last);
         request.setAttribute("txtS", txtSearch);
+        request.setAttribute("categorizedProducts", categorizedSearchResults);
+        request.setAttribute("totalProduct", list.size());
         request.getRequestDispatcher("Home.jsp").forward(request, response);
+    }
+
+    // Phương thức phân loại sản phẩm dựa trên tên sản phẩm
+    private String getCategoryFromProductName(String productName) {
+        if (productName == null) return "Giày Khác";
+        
+        String name = productName.toLowerCase();
+        
+        if (name.contains("nike")) {
+            return "Giày Nike";
+        } else if (name.contains("adidas")) {
+            return "Giày Adidas";
+        } else if (name.contains("mlb")) {
+            return "Giày MLB";
+        } else if (name.contains("puma")) {
+            return "Giày Puma";
+        } else if (name.contains("fila")) {
+            return "Giày Fila";
+        } else if (name.contains("new balance")) {
+            return "Giày New Balance";
+        } else if (name.contains("converse")) {
+            return "Giày Converse";
+        } else if (name.contains("vans")) {
+            return "Giày Vans";
+        } else if (name.contains("reebok")) {
+            return "Giày Reebok";
+        } else if (name.contains("asics")) {
+            return "Giày Asics";
+        } else if (name.contains("under armour")) {
+            return "Giày Under Armour";
+        } else {
+            return "Giày Khác";
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

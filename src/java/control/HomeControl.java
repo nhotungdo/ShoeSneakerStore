@@ -18,12 +18,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  *
  * @author MY PC
  */
-@WebServlet(name="HomeControl", urlPatterns={"/home", "/Home.jsp"})
+@WebServlet(name="HomeControl", urlPatterns={"/home"})
 public class HomeControl extends HttpServlet {
    
    
@@ -44,16 +45,54 @@ public class HomeControl extends HttpServlet {
         DAO dao = new DAO();
         List<Category> listC = dao.getAllCategory();
         
-        // Get products grouped by category
-        Map<String, List<ProductWithCategory>> groupedProducts = dao.getProductsGroupedByCategory();
+        // Lấy sản phẩm theo từng thương hiệu
+        List<ProductWithCategory> nikeProducts = dao.getNikeProducts();
+        List<ProductWithCategory> adidasProducts = dao.getAdidasProducts();
+        List<ProductWithCategory> mlbProducts = dao.getMLBProducts();
+        List<ProductWithCategory> pumaProducts = dao.getPumaProducts();
+        List<ProductWithCategory> filaProducts = dao.getFilaProducts();
+        List<ProductWithCategory> newBalanceProducts = dao.getNewBalanceProducts();
+        List<ProductWithCategory> otherProducts = dao.getOtherProducts();
+        
+        // Tạo map phân loại sản phẩm
+        Map<String, List<ProductWithCategory>> categorizedProducts = new HashMap<>();
+        if (!nikeProducts.isEmpty()) {
+            categorizedProducts.put("Giày Nike", nikeProducts);
+        }
+        if (!adidasProducts.isEmpty()) {
+            categorizedProducts.put("Giày Adidas", adidasProducts);
+        }
+        if (!mlbProducts.isEmpty()) {
+            categorizedProducts.put("Giày MLB", mlbProducts);
+        }
+        if (!pumaProducts.isEmpty()) {
+            categorizedProducts.put("Giày Puma", pumaProducts);
+        }
+        if (!filaProducts.isEmpty()) {
+            categorizedProducts.put("Giày Fila", filaProducts);
+        }
+        if (!newBalanceProducts.isEmpty()) {
+            categorizedProducts.put("Giày New Balance", newBalanceProducts);
+        }
+        if (!otherProducts.isEmpty()) {
+            categorizedProducts.put("Giày Khác", otherProducts);
+        }
         
         // Get total number of products
         int totalProduct = dao.countAllProduct();
         
+        // Get top selling products for banner section
+        List<Product> topProducts = dao.getTop3();
+        
+        // Get all products for fallback
+        List<Product> allProducts = dao.getAllProduct();
+        
         //b2: set data to jsp
         request.setAttribute("listCC", listC);
-        request.setAttribute("groupedProducts", groupedProducts);
+        request.setAttribute("categorizedProducts", categorizedProducts);
         request.setAttribute("totalProduct", totalProduct);
+        request.setAttribute("topProducts", topProducts);
+        request.setAttribute("listP", allProducts);
 
         request.getRequestDispatcher("Home.jsp").forward(request, response);
         //404 -> url

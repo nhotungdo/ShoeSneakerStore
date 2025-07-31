@@ -1650,7 +1650,7 @@ public class DAO {
         List<ProductWithCategory> allProducts = getAllProductWithCategory();
         
         for (ProductWithCategory product : allProducts) {
-            String categoryName = product.getCname();
+            String categoryName = getCategoryFromProductName(product.getName());
             if (!groupedProducts.containsKey(categoryName)) {
                 groupedProducts.put(categoryName, new ArrayList<>());
             }
@@ -1658,6 +1658,268 @@ public class DAO {
         }
         
         return groupedProducts;
+    }
+
+    // Phương thức phân loại sản phẩm dựa trên tên sản phẩm
+    private String getCategoryFromProductName(String productName) {
+        if (productName == null) return "Giày Khác";
+        
+        String name = productName.toLowerCase();
+        
+        if (name.contains("nike")) {
+            return "Giày Nike";
+        } else if (name.contains("adidas")) {
+            return "Giày Adidas";
+        } else if (name.contains("mlb")) {
+            return "Giày MLB";
+        } else if (name.contains("puma")) {
+            return "Giày Puma";
+        } else if (name.contains("fila")) {
+            return "Giày Fila";
+        } else if (name.contains("new balance")) {
+            return "Giày New Balance";
+        } else if (name.contains("converse")) {
+            return "Giày Converse";
+        } else if (name.contains("vans")) {
+            return "Giày Vans";
+        } else if (name.contains("reebok")) {
+            return "Giày Reebok";
+        } else if (name.contains("asics")) {
+            return "Giày Asics";
+        } else if (name.contains("under armour")) {
+            return "Giày Under Armour";
+        } else {
+            return "Giày Khác";
+        }
+    }
+
+    // Phương thức lấy sản phẩm Nike
+    public List<ProductWithCategory> getNikeProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%Nike%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm Adidas
+    public List<ProductWithCategory> getAdidasProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%Adidas%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm MLB
+    public List<ProductWithCategory> getMLBProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%MLB%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm Puma
+    public List<ProductWithCategory> getPumaProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%Puma%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm Fila
+    public List<ProductWithCategory> getFilaProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%Fila%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm New Balance
+    public List<ProductWithCategory> getNewBalanceProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name LIKE '%New Balance%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Phương thức lấy sản phẩm khác
+    public List<ProductWithCategory> getOtherProducts() {
+        List<ProductWithCategory> list = new ArrayList<>();
+        String query = "SELECT p.*, c.cname FROM Product p " +
+                      "INNER JOIN Category c ON p.cateID = c.cid " +
+                      "WHERE p.name NOT LIKE '%Nike%' " +
+                      "AND p.name NOT LIKE '%Adidas%' " +
+                      "AND p.name NOT LIKE '%MLB%' " +
+                      "AND p.name NOT LIKE '%Puma%' " +
+                      "AND p.name NOT LIKE '%Fila%' " +
+                      "AND p.name NOT LIKE '%New Balance%' " +
+                      "ORDER BY p.id";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductWithCategory(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13),
+                        rs.getString(14),
+                        rs.getString(15)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public List<ProductWithCategory> getProductWithCategoryByIndex(int indexPage) {

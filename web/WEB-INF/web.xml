@@ -6,7 +6,7 @@
     version="6.0">
 
     <welcome-file-list>
-        <welcome-file>home</welcome-file>
+        <welcome-file>Home.jsp</welcome-file>
     </welcome-file-list>
 
-</web-app>
+</web-app> 

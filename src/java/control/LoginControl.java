@@ -86,7 +86,7 @@ public class LoginControl extends HttpServlet {
              response.addCookie(u);//luu u va p len Chrome
              response.addCookie(p);
              
-             response.sendRedirect("Home.jsp");
+             response.sendRedirect("home");
          }
     }
 
